@@ -1,0 +1,69 @@
+{
+  "properties": [
+    {
+      "name": "notion.token",
+      "type": "java.lang.String",
+      "description": "Notion integration token used for API requests."
+    },
+    {
+      "name": "notion.database-id",
+      "type": "java.lang.String",
+      "description": "Notion data source or database id to query."
+    },
+    {
+      "name": "notion.version",
+      "type": "java.lang.String",
+      "description": "Notion API version header value."
+    },
+    {
+      "name": "notion.page-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of Notion records to fetch per request."
+    },
+    {
+      "name": "notion.connect-timeout-seconds",
+      "type": "java.lang.Integer",
+      "description": "Connection timeout in seconds for Notion HTTPS calls."
+    },
+    {
+      "name": "notion.date-property",
+      "type": "java.lang.String",
+      "description": "Configured Notion date property name."
+    },
+    {
+      "name": "notion.amount-property",
+      "type": "java.lang.String",
+      "description": "Configured Notion amount property name."
+    },
+    {
+      "name": "notion.category-property",
+      "type": "java.lang.String",
+      "description": "Configured Notion category property name."
+    },
+    {
+      "name": "notion.budget-property",
+      "type": "java.lang.String",
+      "description": "Configured Notion budget property name."
+    },
+    {
+      "name": "notion.ssl.trust-store",
+      "type": "java.lang.String",
+      "description": "Absolute path to a JKS or PKCS12 truststore used for Notion HTTPS calls."
+    },
+    {
+      "name": "notion.ssl.trust-store-password",
+      "type": "java.lang.String",
+      "description": "Password for the Notion truststore."
+    },
+    {
+      "name": "notion.ssl.trust-store-type",
+      "type": "java.lang.String",
+      "description": "Type of the Notion truststore, such as PKCS12 or JKS."
+    },
+    {
+      "name": "notion.ssl.insecure-skip-verification",
+      "type": "java.lang.Boolean",
+      "description": "Temporarily disables TLS certificate validation for Notion HTTPS calls. Unsafe for production."
+    }
+  ]
+}
