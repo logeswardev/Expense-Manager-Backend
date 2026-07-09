@@ -12,6 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionResponse {
+
+    public TransactionResponse(String message) {
+        this.message = message;
+    }
+
+    private String message;
     private List<Transaction> items;
 }
 

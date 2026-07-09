@@ -7,6 +7,9 @@ public class NotionProperties {
 
 	private String token;
 	private String databaseId;
+	private String categoriesDbId;
+	private String accountsDbId;
+	private String monthsDbId;
 	private String version = "2022-06-28";
 	private int pageSize = 100;
 	private int connectTimeoutSeconds = 20;
@@ -26,6 +29,30 @@ public class NotionProperties {
 
 	public void setDatabaseId(String databaseId) {
 		this.databaseId = databaseId;
+	}
+
+	public String getCategoriesDbId() {
+		return categoriesDbId;
+	}
+
+	public void setCategoriesDbId(String categoriesDbId) {
+		this.categoriesDbId = categoriesDbId;
+	}
+
+	public String getAccountsDbId() {
+		return accountsDbId;
+	}
+
+	public void setAccountsDbId(String accountsDbId) {
+		this.accountsDbId = accountsDbId;
+	}
+
+	public String getMonthsDbId() {
+		return monthsDbId;
+	}
+
+	public void setMonthsDbId(String monthsDbId) {
+		this.monthsDbId = monthsDbId;
 	}
 
 	public String getVersion() {
