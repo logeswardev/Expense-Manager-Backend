@@ -16,7 +16,7 @@ import java.net.http.HttpResponse;
 
 import javax.net.ssl.SSLHandshakeException;
 
-@Component
+@Component("notionClientUtil")
 public class Util {
 
     private static final String DATA_SOURCE_QUERY_URL_TEMPLATE = "https://api.notion.com/v1/data_sources/%s/query";
