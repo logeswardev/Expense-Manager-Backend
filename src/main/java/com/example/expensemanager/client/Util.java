@@ -165,10 +165,9 @@ public class Util {
         properties.putObject("Type").putObject("select").put("name", txn.type());
 
         ArrayNode categoriesRelation = properties.putObject("Categories").putArray("relation");
-        for (String category : txn.categories()) {
-            String categoryId = findPageIdByName(client, notionProperties, categoriesDataSourceId, category);
-            categoriesRelation.addObject().put("id", categoryId);
-        }
+
+        String categoryId = findPageIdByName(client, notionProperties, categoriesDataSourceId, txn.categories());
+        categoriesRelation.addObject().put("id", categoryId);
 
         String accountId = findPageIdByName(client, notionProperties, accountsDataSourceId, txn.accounts());
         properties.putObject("Accounts").putArray("relation").addObject().put("id", accountId);
