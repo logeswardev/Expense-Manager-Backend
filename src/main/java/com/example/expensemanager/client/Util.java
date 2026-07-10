@@ -13,6 +13,10 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -23,6 +27,8 @@ public class Util {
     private static final String DATABASE_RETRIEVE_URL_TEMPLATE = "https://api.notion.com/v1/databases/%s";
     private static final String DATA_SOURCE_RETRIEVE_URL_TEMPLATE = "https://api.notion.com/v1/data_sources/%s";
     private static final String PAGE_CREATE_URL = "https://api.notion.com/v1/pages";
+    private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+    private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public HttpResponse<String> sendQueryRequest(HttpClient client,
@@ -172,7 +178,8 @@ public class Util {
         String accountId = findPageIdByName(client, notionProperties, accountsDataSourceId, txn.accounts());
         properties.putObject("Accounts").putArray("relation").addObject().put("id", accountId);
 
-        String monthId = findPageIdByName(client, notionProperties, monthsDataSourceId, txn.month());
+        String resolvedMonth = resolveMonthFromDate(txn.date());
+        String monthId = findPageIdByName(client, notionProperties, monthsDataSourceId, resolvedMonth);
         properties.putObject("Months").putArray("relation").addObject().put("id", monthId);
 
         return objectMapper.writeValueAsString(root);
@@ -236,6 +243,19 @@ public class Util {
 
     private boolean hasText(String value) {
         return value != null && !value.isBlank();
+    }
+
+    private String resolveMonthFromDate(String date) throws IOException {
+        if (!hasText(date)) {
+            throw new IOException("Transaction `date` is required to derive month relation.");
+        }
+
+        try {
+            LocalDate parsedDate = LocalDate.parse(date, INPUT_DATE_FORMATTER);
+            return MONTH_FORMATTER.format(parsedDate);
+        } catch (DateTimeParseException ex) {
+            throw new IOException("Transaction `date` must be in ISO format yyyy-MM-dd. Received: " + date, ex);
+        }
     }
 
     private String abbreviate(String responseBody) {

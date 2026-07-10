@@ -6,6 +6,5 @@ public record TransactionRequest(
         Double amount,
         String categories,          // assuming single select; use List<String> if multi_select
         String type,
-        String accounts,
-        String month
+        String accounts
 ) {}
